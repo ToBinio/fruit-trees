@@ -1,8 +1,8 @@
 {
 	"schemaVersion": 1,
-	"id": "fruit-trees",
+	"id": "sweet-fruits",
 	"version": "${version}",
-	"name": "Fruit Trees",
+	"name": "Sweet Fruits",
 	"description": "This is an example description! Tell everyone what your mod is about!",
 	"authors": [
 		"Me!"
@@ -12,23 +12,23 @@
 		"sources": "https://github.com/FabricMC/fabric-example-mod"
 	},
 	"license": "CC0-1.0",
-	"icon": "assets/fruit-trees/icon.png",
+	"icon": "assets/sweet-fruits/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"tobinio.fruittrees.FruitTrees"
+			"tobinio.sweetfruits.SweetFruits"
 		],
 		"client": [
-			"tobinio.fruittrees.FruitTreesClient"
+			"tobinio.sweetfruits.SweetFruitsClient"
 		],
 		"fabric-datagen": [
-			"tobinio.fruittrees.FruitTreesDataGenerator"
+			"tobinio.sweetfruits.SweetFruitsDataGenerator"
 		]
 	},
 	"mixins": [
-		"fruit-trees.mixins.json",
+		"sweet-fruits.mixins.json",
 		{
-			"config": "fruit-trees.client.mixins.json",
+			"config": "sweet-fruits.client.mixins.json",
 			"environment": "client"
 		}
 	],

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "grown=false": {
+      "model": "sweet-fruits:block/apple"
+    },
+    "grown=true": {
+      "model": "sweet-fruits:block/apple_grown"
+    }
+  }
+}
