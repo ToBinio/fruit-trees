@@ -5,6 +5,8 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.minecraft.registry.RegistryBuilder;
 import net.minecraft.registry.RegistryKeys;
 import tobinio.fruittrees.datagen.DynamicRegistryProvider;
+import tobinio.fruittrees.datagen.LootTableProvider;
+import tobinio.fruittrees.datagen.ModelProvider;
 import tobinio.fruittrees.world.ModConfiguredFeatures;
 import tobinio.fruittrees.world.ModPlacedFeatures;
 
@@ -14,6 +16,8 @@ public class FruitTreesDataGenerator implements DataGeneratorEntrypoint {
         FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
 
         pack.addProvider(DynamicRegistryProvider::new);
+        pack.addProvider(ModelProvider::new);
+        pack.addProvider(LootTableProvider::new);
     }
 
     @Override

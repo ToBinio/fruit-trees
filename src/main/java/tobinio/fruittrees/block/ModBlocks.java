@@ -6,6 +6,7 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import tobinio.fruittrees.FruitTrees;
 import tobinio.fruittrees.block.custom.AppleBlock;
@@ -36,6 +37,10 @@ public class ModBlocks {
             .ticksRandomly()
             .breakInstantly()
             .offset(AbstractBlock.OffsetType.XZ)), false);
+
+    public static final Block APPLE_LEAVES = registerBlock("apple_leaves",
+            Blocks.createLeavesBlock(BlockSoundGroup.GRASS),
+            true);
 
     private static Block registerBlock(String name, Block block, boolean blockItem) {
         if (blockItem) {
