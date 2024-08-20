@@ -2,6 +2,7 @@ package tobinio.sweetfruits.block.custom;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -13,7 +14,11 @@ import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 
@@ -24,6 +29,20 @@ import net.minecraft.world.event.GameEvent;
  */
 public class AppleBlock extends Block {
     public static final BooleanProperty GROWN = BooleanProperty.of("grown");
+
+    private static final VoxelShape GROWN_SHAPE = VoxelShapes.cuboid(5 / 16f,
+            4 / 16f,
+            5 / 16f,
+            11 / 16f,
+            16 / 16f,
+            11 / 16f);
+    private static final VoxelShape NOT_GROWN_SHAPE = VoxelShapes.cuboid(6 / 16f,
+            12 / 16f,
+            6 / 16f,
+            10 / 16f,
+            16 / 16f,
+            10 / 16f);
+
 
     public AppleBlock(Settings settings) {
         super(settings);
@@ -46,10 +65,23 @@ public class AppleBlock extends Block {
     }
 
     @Override
+    protected VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+        VoxelShape voxelShape = state.get(GROWN) ? GROWN_SHAPE : NOT_GROWN_SHAPE;
+
+        Vec3d vec3d = state.getModelOffset(world, pos);
+        return voxelShape.offset(vec3d.x, vec3d.y, vec3d.z);
+    }
+
+    @Override
     protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         if (state.get(GROWN)) {
             dropStack(world, pos, new ItemStack(Items.APPLE, 1));
-            world.playSound(null, pos, SoundEvents.BLOCK_SWEET_BERRY_BUSH_PICK_BERRIES, SoundCategory.BLOCKS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
+            world.playSound(null,
+                    pos,
+                    SoundEvents.BLOCK_SWEET_BERRY_BUSH_PICK_BERRIES,
+                    SoundCategory.BLOCKS,
+                    1.0F,
+                    0.8F + world.random.nextFloat() * 0.4F);
             BlockState blockState = state.with(GROWN, false);
             world.setBlockState(pos, blockState, Block.NOTIFY_LISTENERS);
             world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(player, blockState));

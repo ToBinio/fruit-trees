@@ -2,9 +2,11 @@ package tobinio.sweetfruits.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
-import net.minecraft.data.client.BlockStateModelGenerator;
-import net.minecraft.data.client.ItemModelGenerator;
+import net.minecraft.data.client.*;
+import net.minecraft.util.Identifier;
 import tobinio.sweetfruits.block.ModBlocks;
+
+import java.util.Optional;
 
 /**
  * Created: 20.08.24
@@ -18,7 +20,11 @@ public class ModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
-        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.APPLE_LEAVES);
+        blockStateModelGenerator.registerSingleton(ModBlocks.APPLE_LEAVES,
+                TexturedModel.makeFactory(TextureMap::all,
+                        new Model(Optional.of(Identifier.ofVanilla("block/leaves")),
+                                Optional.empty(),
+                                TextureKey.ALL)));
     }
 
     @Override
