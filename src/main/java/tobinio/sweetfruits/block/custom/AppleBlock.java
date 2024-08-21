@@ -2,6 +2,7 @@ package tobinio.sweetfruits.block.custom;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -14,13 +15,17 @@ import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
+import net.minecraft.world.WorldView;
 import net.minecraft.world.event.GameEvent;
+import tobinio.sweetfruits.block.ModBlocks;
 
 /**
  * Created: 19.08.24
@@ -89,5 +94,18 @@ public class AppleBlock extends Block {
         }
 
         return super.onUse(state, world, pos, player, hit);
+    }
+
+    @Override
+    protected boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
+        return world.getBlockState(pos.up()).isOf(ModBlocks.APPLE_LEAVES);
+    }
+
+    @Override
+    protected BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState,
+            WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+        return direction == Direction.UP && !state.canPlaceAt(world, pos)
+                ? Blocks.AIR.getDefaultState()
+                : super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 }

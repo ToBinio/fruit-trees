@@ -15,12 +15,13 @@ import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
 import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import net.minecraft.world.gen.treedecorator.AttachedToLeavesTreeDecorator;
-import net.minecraft.world.gen.trunk.ForkingTrunkPlacer;
+import net.minecraft.world.gen.trunk.LargeOakTrunkPlacer;
 import tobinio.sweetfruits.SweetFruits;
 import tobinio.sweetfruits.block.ModBlocks;
 import tobinio.sweetfruits.block.custom.AppleBlock;
 
 import java.util.List;
+import java.util.OptionalInt;
 
 /**
  * Created: 18.08.24
@@ -36,11 +37,14 @@ public class ModConfiguredFeatures {
         register(context,
                 APPLE,
                 Feature.TREE,
-                new TreeFeatureConfig.Builder(BlockStateProvider.of(Blocks.OAK_LOG),
-                        new ForkingTrunkPlacer(4, 2, 2),
+                new TreeFeatureConfig.Builder(
+                        BlockStateProvider.of(Blocks.OAK_LOG),
+                        new LargeOakTrunkPlacer(5, 2, 2),
                         BlockStateProvider.of(ModBlocks.APPLE_LEAVES),
-                        new BlobFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(0), 3),
-                        new TwoLayersFeatureSize(1, 0, 1))
+                        new BlobFoliagePlacer(ConstantIntProvider.create(3), ConstantIntProvider.create(3), 3),
+                        new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4))
+                )
+                        .ignoreVines()
                         .decorators(List.of(new AttachedToLeavesTreeDecorator(0.2F,
                                         0,
                                         0,

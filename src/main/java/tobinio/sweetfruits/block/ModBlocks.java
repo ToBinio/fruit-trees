@@ -1,6 +1,7 @@
 package tobinio.sweetfruits.block;
 
 import net.minecraft.block.*;
+import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -20,22 +21,25 @@ import java.util.Optional;
  */
 public class ModBlocks {
     public static final Block APPLE_TREE_SAPLING = registerBlock("apple_tree_sapling",
-            new SaplingBlock(new SaplingGenerator(
-                    "apple",
+            new SaplingBlock(new SaplingGenerator("apple",
                     0.1F,
                     Optional.empty(),
                     Optional.empty(),
                     Optional.of(ModConfiguredFeatures.APPLE),
                     Optional.empty(),
                     Optional.empty(),
-                    Optional.empty()
-            ), AbstractBlock.Settings.copy(Blocks.OAK_SAPLING)), true);
+                    Optional.empty()), AbstractBlock.Settings.copy(Blocks.OAK_SAPLING)),
+            true);
 
-    public static final Block APPLE = registerBlock("apple", new AppleBlock(AbstractBlock.Settings.create()
-            .noCollision()
-            .ticksRandomly()
-            .breakInstantly()
-            .offset(AbstractBlock.OffsetType.XZ)), false);
+    public static final Block APPLE = registerBlock("apple",
+            new AppleBlock(AbstractBlock.Settings.create()
+                    .noCollision()
+                    .ticksRandomly()
+                    .sounds(BlockSoundGroup.GRASS)
+                    .pistonBehavior(PistonBehavior.DESTROY)
+                    .breakInstantly()
+                    .offset(AbstractBlock.OffsetType.XZ)),
+            false);
 
     public static final Block APPLE_LEAVES = registerBlock("apple_leaves",
             Blocks.createLeavesBlock(BlockSoundGroup.GRASS),
@@ -49,7 +53,8 @@ public class ModBlocks {
     }
 
     private static Item registerBlockItem(String name, Block block) {
-        return Registry.register(Registries.ITEM, Identifier.of(SweetFruits.MOD_ID, name),
+        return Registry.register(Registries.ITEM,
+                Identifier.of(SweetFruits.MOD_ID, name),
                 new BlockItem(block, new Item.Settings()));
     }
 
