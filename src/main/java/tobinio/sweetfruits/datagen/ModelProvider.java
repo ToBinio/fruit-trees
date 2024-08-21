@@ -25,6 +25,9 @@ public class ModelProvider extends FabricModelProvider {
                         new Model(Optional.of(Identifier.ofVanilla("block/leaves")),
                                 Optional.empty(),
                                 TextureKey.ALL)));
+
+        blockStateModelGenerator.registerTintableCross(ModBlocks.APPLE_SAPLING,
+                BlockStateModelGenerator.TintType.NOT_TINTED);
     }
 
     @Override

@@ -20,9 +20,10 @@ public class ModItemGroup {
             Identifier.of(SweetFruits.MOD_ID, "sweet-fruits"),
             FabricItemGroup.builder()
                     .displayName(Text.translatable("itemgroup.sweet-fruits"))
-                    .icon(() -> new ItemStack(ModBlocks.APPLE_TREE_SAPLING.asItem()))
+                    .icon(() -> new ItemStack(ModBlocks.APPLE_SAPLING.asItem()))
                     .entries((displayContext, entries) -> {
-                        entries.add(ModBlocks.APPLE_TREE_SAPLING.asItem());
+                        entries.add(ModBlocks.APPLE_SAPLING.asItem());
+                        entries.add(ModBlocks.APPLE_LEAVES.asItem());
                     })
                     .build());
 

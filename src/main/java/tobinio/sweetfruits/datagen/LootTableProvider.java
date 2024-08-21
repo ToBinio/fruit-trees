@@ -28,7 +28,7 @@ public class LootTableProvider extends FabricBlockLootTableProvider {
 
     @Override
     public void generate() {
-        addDrop(ModBlocks.APPLE_LEAVES, leavesDrops(ModBlocks.APPLE_LEAVES, ModBlocks.APPLE_TREE_SAPLING, 0.1f));
+        addDrop(ModBlocks.APPLE_LEAVES, leavesDrops(ModBlocks.APPLE_LEAVES, ModBlocks.APPLE_SAPLING, 0.1f));
         addDrop(ModBlocks.APPLE,
                 LootTable.builder()
                         .pool(LootPool.builder()

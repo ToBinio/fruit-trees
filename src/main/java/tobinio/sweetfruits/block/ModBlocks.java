@@ -20,7 +20,7 @@ import java.util.Optional;
  * @author Tobias Frischmann
  */
 public class ModBlocks {
-    public static final Block APPLE_TREE_SAPLING = registerBlock("apple_tree_sapling",
+    public static final Block APPLE_SAPLING = registerBlock("apple_sapling",
             new SaplingBlock(new SaplingGenerator("apple",
                     0.1F,
                     Optional.empty(),
