@@ -1,4 +1,4 @@
-package tobinio.sweetfruits.world;
+package tobinio.sweetfruits.world.feature;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.registry.Registerable;
@@ -19,6 +19,7 @@ import net.minecraft.world.gen.trunk.LargeOakTrunkPlacer;
 import tobinio.sweetfruits.SweetFruits;
 import tobinio.sweetfruits.block.ModBlocks;
 import tobinio.sweetfruits.block.custom.AppleBlock;
+import tobinio.sweetfruits.world.feature.custom.BushFeatureConfig;
 
 import java.util.List;
 import java.util.OptionalInt;
@@ -30,21 +31,19 @@ import java.util.OptionalInt;
  */
 public class ModConfiguredFeatures {
 
-    public static final RegistryKey<ConfiguredFeature<?, ?>> APPLE = registerKey("apple");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> APPLE_TREE = registerKey("apple");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> BLACKBERRY_BUSH = registerKey("blackberry");
 
     public static void boostrap(Registerable<ConfiguredFeature<?, ?>> context) {
 
         register(context,
-                APPLE,
+                APPLE_TREE,
                 Feature.TREE,
-                new TreeFeatureConfig.Builder(
-                        BlockStateProvider.of(Blocks.OAK_LOG),
+                new TreeFeatureConfig.Builder(BlockStateProvider.of(Blocks.OAK_LOG),
                         new LargeOakTrunkPlacer(5, 2, 2),
                         BlockStateProvider.of(ModBlocks.APPLE_LEAVES),
                         new BlobFoliagePlacer(ConstantIntProvider.create(3), ConstantIntProvider.create(3), 3),
-                        new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4))
-                )
-                        .ignoreVines()
+                        new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4))).ignoreVines()
                         .decorators(List.of(new AttachedToLeavesTreeDecorator(0.2F,
                                         0,
                                         0,
@@ -57,7 +56,13 @@ public class ModConfiguredFeatures {
                                         BlockStateProvider.of(ModBlocks.APPLE.getDefaultState()
                                                 .with(AppleBlock.GROWN, false)),
                                         2,
-                                        List.of(Direction.DOWN)))).build());
+                                        List.of(Direction.DOWN))))
+                        .build());
+
+        register(context,
+                BLACKBERRY_BUSH,
+                ModFeatures.BUSH_FEATURE,
+                new BushFeatureConfig(Identifier.of("spruce_leaves"), Identifier.of("oak_button")));
     }
 
     public static RegistryKey<ConfiguredFeature<?, ?>> registerKey(String name) {

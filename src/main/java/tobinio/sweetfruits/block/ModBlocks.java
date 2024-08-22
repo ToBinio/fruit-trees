@@ -10,7 +10,7 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import tobinio.sweetfruits.SweetFruits;
 import tobinio.sweetfruits.block.custom.AppleBlock;
-import tobinio.sweetfruits.world.ModConfiguredFeatures;
+import tobinio.sweetfruits.world.feature.ModConfiguredFeatures;
 
 import java.util.Optional;
 
@@ -25,7 +25,7 @@ public class ModBlocks {
                     0.1F,
                     Optional.empty(),
                     Optional.empty(),
-                    Optional.of(ModConfiguredFeatures.APPLE),
+                    Optional.of(ModConfiguredFeatures.APPLE_TREE),
                     Optional.empty(),
                     Optional.empty(),
                     Optional.empty()), AbstractBlock.Settings.copy(Blocks.OAK_SAPLING)),

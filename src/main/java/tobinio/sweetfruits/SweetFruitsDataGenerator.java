@@ -7,8 +7,8 @@ import net.minecraft.registry.RegistryKeys;
 import tobinio.sweetfruits.datagen.DynamicRegistryProvider;
 import tobinio.sweetfruits.datagen.LootTableProvider;
 import tobinio.sweetfruits.datagen.ModelProvider;
-import tobinio.sweetfruits.world.ModConfiguredFeatures;
-import tobinio.sweetfruits.world.ModPlacedFeatures;
+import tobinio.sweetfruits.world.feature.ModConfiguredFeatures;
+import tobinio.sweetfruits.world.feature.ModPlacedFeatures;
 
 public class SweetFruitsDataGenerator implements DataGeneratorEntrypoint {
     @Override
