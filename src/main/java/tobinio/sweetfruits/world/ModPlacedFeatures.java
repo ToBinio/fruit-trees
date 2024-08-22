@@ -30,8 +30,12 @@ public class ModPlacedFeatures {
     public static void boostrap(Registerable<PlacedFeature> context) {
         var configuredFeatureRegistryEntryLookup = context.getRegistryLookup(RegistryKeys.CONFIGURED_FEATURE);
 
-        register(context, APPLE_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.APPLE),
-                VegetationPlacedFeatures.treeModifiersWithWouldSurvive(PlacedFeatures.createCountExtraModifier(1, 0.01f, 2), ModBlocks.APPLE_SAPLING));
+        register(context,
+                APPLE_PLACED_KEY,
+                configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.APPLE),
+                VegetationPlacedFeatures.treeModifiersWithWouldSurvive(PlacedFeatures.createCountExtraModifier(0,
+                        0.05f,
+                        1), ModBlocks.APPLE_SAPLING));
     }
 
     private static void register(Registerable<PlacedFeature> context, RegistryKey<PlacedFeature> key,
