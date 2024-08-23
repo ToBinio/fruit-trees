@@ -2,6 +2,7 @@ package tobinio.sweetfruits.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
+import net.minecraft.block.Block;
 import net.minecraft.data.client.*;
 import net.minecraft.util.Identifier;
 import tobinio.sweetfruits.block.ModBlocks;
@@ -20,14 +21,19 @@ public class ModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
-        blockStateModelGenerator.registerSingleton(ModBlocks.APPLE_LEAVES,
+        blockStateModelGenerator.registerTintableCross(ModBlocks.APPLE_SAPLING,
+                BlockStateModelGenerator.TintType.NOT_TINTED);
+
+        registerLeaves(blockStateModelGenerator, ModBlocks.APPLE_LEAVES);
+        registerLeaves(blockStateModelGenerator, ModBlocks.BLACK_BERRY_LEAVES);
+    }
+
+    private static void registerLeaves(BlockStateModelGenerator blockStateModelGenerator, Block blackBerryLeaves) {
+        blockStateModelGenerator.registerSingleton(blackBerryLeaves,
                 TexturedModel.makeFactory(TextureMap::all,
                         new Model(Optional.of(Identifier.ofVanilla("block/leaves")),
                                 Optional.empty(),
                                 TextureKey.ALL)));
-
-        blockStateModelGenerator.registerTintableCross(ModBlocks.APPLE_SAPLING,
-                BlockStateModelGenerator.TintType.NOT_TINTED);
     }
 
     @Override

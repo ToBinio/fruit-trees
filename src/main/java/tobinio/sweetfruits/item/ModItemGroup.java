@@ -24,6 +24,8 @@ public class ModItemGroup {
                     .entries((displayContext, entries) -> {
                         entries.add(ModBlocks.APPLE_SAPLING.asItem());
                         entries.add(ModBlocks.APPLE_LEAVES.asItem());
+
+                        entries.add(ModBlocks.BLACK_BERRY_LEAVES.asItem());
                     })
                     .build());
 

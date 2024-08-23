@@ -62,7 +62,8 @@ public class ModConfiguredFeatures {
         register(context,
                 BLACKBERRY_BUSH,
                 ModFeatures.BUSH_FEATURE,
-                new BushFeatureConfig(Identifier.of("spruce_leaves"), Identifier.of("oak_button")));
+                new BushFeatureConfig(Identifier.of(SweetFruits.MOD_ID, "black_berry_leaves"),
+                        Identifier.of(SweetFruits.MOD_ID, "black_berry_bush")));
     }
 
     public static RegistryKey<ConfiguredFeature<?, ?>> registerKey(String name) {

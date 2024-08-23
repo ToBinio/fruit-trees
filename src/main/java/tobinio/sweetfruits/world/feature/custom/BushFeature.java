@@ -63,6 +63,14 @@ public class BushFeature extends Feature<BushFeatureConfig> {
             world.setBlockState(leaveBlock, leave.getDefaultState(), Block.NOTIFY_NEIGHBORS);
         }
 
+        placeBushes(leaveBlocks, random, world, bush);
+        placeBushes(leaveBlocks, random, world, bush);
+
+        return false;
+    }
+
+    private static void placeBushes(ArrayList<BlockPos> leaveBlocks, Random random, StructureWorldAccess world,
+            Block bush) {
         for (BlockPos leaveBlock : leaveBlocks) {
             Direction direction = Direction.random(random);
 
@@ -72,20 +80,9 @@ public class BushFeature extends Feature<BushFeatureConfig> {
                 continue;
             }
 
-            BlockState blockState;
-            if (direction.getAxis() == Direction.Axis.Y) {
-                blockState = bush.getDefaultState()
-                        .with(Properties.BLOCK_FACE, direction == Direction.UP ? BlockFace.FLOOR : BlockFace.CEILING);
-            } else {
-                blockState = bush.getDefaultState()
-                        .with(Properties.BLOCK_FACE, BlockFace.WALL)
-                        .with(Properties.HORIZONTAL_FACING, direction);
-            }
-
+            BlockState blockState = bush.getDefaultState().with(Properties.FACING, direction);
             world.setBlockState(bushPos, blockState, Block.NOTIFY_NEIGHBORS);
         }
-
-        return false;
     }
 
     private void generateLeaves(StructureWorldAccess world, BlockPos pos, ArrayList<BlockPos> leaveBlocks,
