@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/leaves",
+  "textures": {
+    "all": "sweet-fruits:block/black_berry_leaves_stage1"
+  }
+}

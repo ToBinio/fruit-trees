@@ -1,16 +1,16 @@
 package tobinio.sweetfruits.block.custom;
 
-import com.mojang.serialization.MapCodec;
 import net.minecraft.block.*;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
-import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.WorldView;
+import tobinio.sweetfruits.block.ModBlocks;
 import tobinio.sweetfruits.util.VoxelRotation;
 
 /**
@@ -31,6 +31,21 @@ public class BlackBerryBushBlock extends SweetBerryBushBlock {
         super.appendProperties(builder);
 
         builder.add(FACING);
+    }
+
+    @Override
+    protected boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
+        if (state.get(FACING) == Direction.UP) {
+            BlockPos blockPos = pos.down();
+            BlockState floor = world.getBlockState(blockPos);
+
+            if (floor.isIn(BlockTags.DIRT) || floor.isOf(Blocks.FARMLAND)) {
+                return true;
+            }
+        }
+
+        BlockPos target = pos.offset(state.get(FACING).getOpposite());
+        return world.getBlockState(target).isOf(ModBlocks.BLACK_BERRY_LEAVES);
     }
 
     @Override
